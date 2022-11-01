@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+
+ANDROID_NDK_HOME=/home/shane/Android/Sdk/ndk/25.1.8937393;
+ANDROID_SDK_HOME=/home/shane/Android/Sdk;
+
+
 case $ANDROID_ABI in
   x86)
     # Disabling assembler optimizations, because they have text relocations
@@ -41,8 +46,8 @@ DEP_LD_FLAGS="-L${BUILD_DIR_EXTERNAL}/${ANDROID_ABI}/lib $FFMPEG_EXTRA_LD_FLAGS"
   --strip=${FAM_STRIP} \
   --extra-cflags="-O3 -fPIC $DEP_CFLAGS" \
   --extra-ldflags="$DEP_LD_FLAGS" \
-  --enable-shared \
-  --disable-static \
+  --disable-shared \
+  --enable-static \
   --disable-vulkan \
   --pkg-config=${PKG_CONFIG_EXECUTABLE} \
   ${EXTRA_BUILD_CONFIGURATION_FLAGS} \
@@ -51,3 +56,4 @@ DEP_LD_FLAGS="-L${BUILD_DIR_EXTERNAL}/${ANDROID_ABI}/lib $FFMPEG_EXTRA_LD_FLAGS"
 ${MAKE_EXECUTABLE} clean
 ${MAKE_EXECUTABLE} -j${HOST_NPROC}
 ${MAKE_EXECUTABLE} install
+
